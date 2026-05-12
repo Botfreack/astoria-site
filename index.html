@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astoria Kava — меню</title>
+  <meta name="description" content="Astoria Kava — меню кавʼярні та Instagram." />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <!-- Верхня частина сайту: логотип і посилання на Instagram -->
+  <header class="header">
+    <div class="container header-inner">
+      <a class="logo" href="#top" aria-label="Astoria Kava">
+        <img
+           src="images/logo.png"
+           alt="Astoria Kava Logo"
+          class="logo-image"
+        />
+        <div>
+          <div class="logo-title">ASTORIA</div>
+          <div class="logo-subtitle">kava</div>
+        </div>
+      </a>
+
+      <a class="instagram-link" href="https://instagram.com/astoria.kava" target="_blank" rel="noopener">
+        Instagram
+      </a>
+    </div>
+  </header>
+
+  <!-- Перший екран сайту з фоновим зображенням -->
+  <main id="top" class="hero">
+    <div class="container hero-content">
+      <p class="eyebrow">кава з історією</p>
+      <h1>Astoria<br>Kava</h1>
+      <p class="hero-text">
+        Місце, де смак має характер
+      </p>
+
+      <div class="hero-actions">
+        <a class="button button-primary" href="#menu">Переглянути меню</a>
+        <a class="button button-secondary" href="https://instagram.com/astoria.kava" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Секція меню. Дані автоматично підтягуються з data/menu.json -->
+  <section class="menu-section" id="menu">
+    <div class="container">
+      <div class="section-title">
+        <span>меню</span>
+        <h2>Що сьогодні будемо?</h2>
+      </div>
+
+      <!-- Сюди JavaScript вставляє категорії та позиції меню -->
+      <div class="menu-grid" id="menuGrid"></div>
+    </div>
+  </section>
+
+  <!-- Нижня частина сайту -->
+  <footer class="footer">
+    <div class="container">
+      <p>Astoria Kava · Life begins after coffee</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,365 @@
+/* Основні кольори сайту */
+:root {
+  --bg-dark: #070403;
+  --text-main: #fff5df;
+  --text-muted: #d8c3a0;
+  --accent: #d6a64d;
+  --card-bg: rgba(10, 7, 5, 0.72);
+  --border: rgba(214, 166, 77, 0.32);
+}
+
+/* Скидання стандартних відступів браузера */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Плавний скрол до меню */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Основні налаштування сторінки */
+body {
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-main);
+  background: var(--bg-dark);
+}
+
+/* Головний фоновий малюнок сайту */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url("../images/hero-bg.png") center / cover no-repeat;
+}
+
+/* Затемнення поверх фону, щоб текст добре читався */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.84), rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.76)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.9));
+}
+
+/* Загальна ширина контенту */
+.container {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+/* Верхня панель сайту */
+.header {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+/* Розташування логотипу і кнопки Instagram */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+/* Посилання-логотип */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+/* Зображення логотипу */
+.logo-image {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  display: block;
+  filter:
+    drop-shadow(0 6px 18px rgba(0, 0, 0, 0.45));
+}
+
+/* Назва кавʼярні */
+.logo-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+/* Підпис під назвою кавʼярні */
+.logo-subtitle {
+  margin-top: 6px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+}
+
+/* Кнопка Instagram у шапці */
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 22px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(0, 0, 0, 0.32);
+  transition: 0.25s ease;
+}
+
+/* Ефект наведення на Instagram */
+.instagram-link:hover {
+  color: #1b1208;
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Перший екран сайту */
+.hero {
+  min-height: calc(100vh - 105px);
+  display: flex;
+  align-items: center;
+  padding: 80px 0 60px;
+}
+
+/* Контент першого екрану */
+.hero-content {
+  max-width: 720px;
+}
+
+/* Малий напис над заголовком */
+.eyebrow {
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+}
+
+/* Головний заголовок */
+h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(58px, 9vw, 118px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 12px 38px rgba(0, 0, 0, 0.72);
+}
+
+/* Короткий опис на першому екрані */
+.hero-text {
+  max-width: 560px;
+  margin-top: 28px;
+  color: var(--text-muted);
+  font-size: 20px;
+  line-height: 1.7;
+  text-shadow: 0 6px 22px rgba(0, 0, 0, 0.8);
+}
+
+/* Блок кнопок на першому екрані */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 36px;
+}
+
+/* Загальний стиль кнопок */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  transition: 0.25s ease;
+}
+
+/* Основна кнопка меню */
+.button-primary {
+  color: #1b1208;
+  background: var(--accent);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.45);
+}
+
+/* Додаткова кнопка Instagram */
+.button-secondary {
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.38);
+}
+
+/* Ефект наведення на кнопки */
+.button:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.08);
+}
+
+/* Секція меню */
+.menu-section {
+  padding: 76px 0 96px;
+  background: rgba(0, 0, 0, 0.64);
+  border-top: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+
+/* Заголовок секції меню */
+.section-title {
+  margin-bottom: 38px;
+  text-align: center;
+}
+
+/* Малий підпис секції */
+.section-title span {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+}
+
+/* Великий заголовок секції */
+.section-title h2 {
+  margin-top: 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(38px, 6vw, 64px);
+  line-height: 1;
+}
+
+/* Сітка меню */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+/* Картка категорії меню */
+.menu-card {
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  background: var(--card-bg);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+}
+
+/* Назва категорії меню */
+.menu-card h3 {
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  color: #ffe1a3;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+}
+
+/* Один пункт меню */
+.menu-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 13px 0;
+  color: var(--text-main);
+  font-size: 16px;
+}
+
+/* Назва напою */
+.menu-name {
+  white-space: nowrap;
+}
+
+/* Пунктир між назвою і ціною */
+.menu-line {
+  flex: 1;
+  border-bottom: 1px dotted rgba(214, 166, 77, 0.45);
+  transform: translateY(-5px);
+}
+
+/* Ціна напою */
+.menu-price {
+  color: var(--accent);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Нижня частина сайту */
+.footer {
+  padding: 32px 0;
+  border-top: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.82);
+  text-align: center;
+}
+
+/* Текст у футері */
+.footer p {
+  color: var(--text-muted);
+}
+
+/* Адаптація під планшети */
+@media (max-width: 900px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 70px 0 90px;
+  }
+}
+
+/* Адаптація під телефони */
+@media (max-width: 560px) {
+  .header-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .logo-title {
+    font-size: 23px;
+  }
+
+  .hero-text {
+    font-size: 17px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .button,
+  .instagram-link {
+    width: 100%;
+  }
+
+  .menu-card {
+    padding: 22px;
+  }
+
+  .menu-item {
+    font-size: 15px;
+  }
+
+  .menu-name {
+    white-space: normal;
+  }
+}
