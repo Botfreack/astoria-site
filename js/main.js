@@ -1,78 +1,108 @@
-// Запускаємо завантаження меню після повного відкриття HTML-сторінки
-window.addEventListener("DOMContentLoaded", () => {
-  loadMenu();
-});
+// =========================
+// ЗАВАНТАЖЕННЯ МЕНЮ
+// =========================
 
-// Завантажуємо меню з окремого JSON-файлу, щоб власники могли редагувати його без зміни коду
+// Чекаємо поки HTML повністю завантажиться
+document.addEventListener("DOMContentLoaded", loadMenu);
+
+// Основна функція завантаження меню
 async function loadMenu() {
+
   try {
-    // Отримуємо файл з меню
+
+    // Завантажуємо menu.json
     const response = await fetch("data/menu.json");
 
-    // Якщо файл не знайдено або є помилка — зупиняємо виконання
+    // Якщо файл не знайдено
     if (!response.ok) {
-      throw new Error("Не вдалося завантажити меню");
+      throw new Error("Не вдалося завантажити menu.json");
     }
 
-    // Перетворюємо JSON у звичайний JavaScript-масив
+    // Перетворюємо JSON у JS-об'єкт
     const menuData = await response.json();
 
-    // Передаємо отримані дані у функцію відображення меню
+    // Малюємо меню
     renderMenu(menuData);
-  } catch (error) {
-    // Показуємо повідомлення, якщо меню не завантажилось
-    showMenuError();
 
-    // Виводимо помилку в консоль для розробника
+  } catch (error) {
+
+    // Якщо помилка — показуємо повідомлення
+    const menuGrid = document.getElementById("menuGrid");
+
+    menuGrid.innerHTML = `
+      <article class="menu-card">
+        <h3>Меню недоступне</h3>
+
+        <div class="menu-item">
+          <span class="menu-name">
+            Спробуйте оновити сторінку пізніше
+          </span>
+        </div>
+      </article>
+    `;
+
     console.error(error);
   }
 }
 
-// Створюємо HTML-картки меню на основі даних з data/menu.json
+// =========================
+// ВІДОБРАЖЕННЯ МЕНЮ
+// =========================
+
 function renderMenu(menuData) {
-  // Знаходимо блок, у який треба вставити меню
+
+  // Контейнер меню
   const menuGrid = document.getElementById("menuGrid");
 
-  // Створюємо HTML для кожної категорії меню
-  menuGrid.innerHTML = menuData.map((category) => {
-    // Створюємо HTML для кожного напою в категорії
-    const itemsHtml = category.items.map((item) => createMenuItem(item)).join("");
+  // Створюємо HTML
+  const menuHtml = menuData.map(category => {
 
-    // Повертаємо готову картку категорії
+    // Позиції категорії
+    const itemsHtml = category.items.map(item => {
+
+      return `
+        <div class="menu-item">
+
+          <span class="menu-name">
+            ${escapeHtml(item.name)}
+          </span>
+
+          <span class="menu-line"></span>
+
+          <span class="menu-price">
+            ${escapeHtml(item.price)}
+          </span>
+
+        </div>
+      `;
+
+    }).join("");
+
+    // Категорія
     return `
       <article class="menu-card">
-        <h3>${escapeHtml(category.title)}</h3>
+
+        <h3>
+          ${escapeHtml(category.title)}
+        </h3>
+
         ${itemsHtml}
+
       </article>
     `;
+
   }).join("");
+
+  // Вставляємо меню в HTML
+  menuGrid.innerHTML = menuHtml;
 }
 
-// Створюємо один пункт меню: назва, лінія і ціна
-function createMenuItem(item) {
-  return `
-    <div class="menu-item">
-      <span class="menu-name">${escapeHtml(item.name)}</span>
-      <span class="menu-line"></span>
-      <span class="menu-price">${escapeHtml(item.price)}</span>
-    </div>
-  `;
-}
+// =========================
+// ЗАХИСТ ВІД HTML-ВСТАВОК
+// =========================
 
-// Показуємо повідомлення, якщо меню тимчасово не завантажилось
-function showMenuError() {
-  const menuGrid = document.getElementById("menuGrid");
-
-  menuGrid.innerHTML = `
-    <div class="menu-card">
-      <h3>Меню тимчасово недоступне</h3>
-      <p>Спробуйте оновити сторінку пізніше.</p>
-    </div>
-  `;
-}
-
-// Захищаємо сторінку від випадкового вставлення HTML-коду через menu.json
 function escapeHtml(value) {
+
   return String(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
